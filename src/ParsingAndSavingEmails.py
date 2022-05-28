@@ -2,18 +2,18 @@
 
 import pickle
 import os
-from FetchingEmails import EmailHandler
+from src.FetchingEmails import EmailHandler
 import email
 from collections import defaultdict
 from typing import Dict
 
 def pickle_email(data):
-    file = open(f"Emails/email_{len(os.listdir('Emails'))}", "ab")
+    file = open(f"src/Emails/email_{len(os.listdir('Emails'))}", "ab")
     pickle.dump(data, file)
     file.close()
 
 def load_email(file_name):
-    file = open(f"Emails/{file_name}", 'rb')
+    file = open(f"src/Emails/{file_name}", 'rb')
     new_data = pickle.load(file)
     file.close()
     return new_data
