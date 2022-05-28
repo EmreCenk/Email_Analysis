@@ -4,6 +4,9 @@ import pickle
 import os
 from FetchingEmails import EmailHandler
 import email
+from collections import defaultdict
+from typing import Dict
+
 def pickle_email(data):
     file = open(f"Emails/email_{len(os.listdir('Emails'))}", "ab")
     pickle.dump(data, file)
@@ -29,3 +32,26 @@ def parse_and_loop_all_emails():
             yield msg
         except:
             yield None
+
+
+def count_all_emails() -> Dict[str: int]:
+    # counted_emails = 0
+
+    def zero(): return 0
+    emails = defaultdict(zero)
+    for msg in parse_and_loop_all_emails():
+        try:
+            email_source = msg["From"]
+        except Exception as E:
+            continue
+
+        start = max(0, email_source.find("<") + 1)
+        end = email_source.find(">")
+        if end != -1: end += 1
+        else: end = len(email_source)
+
+        email_source = email_source[start: end]
+        if (email_source == ""): print(msg["From"], start, end)
+        emails[email_source] += 1
+        # counted_emails += 1
+    return emails
