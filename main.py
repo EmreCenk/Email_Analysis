@@ -1,13 +1,26 @@
 
 # Importing libraries
-import os
-from SavingEmails import load_email
-import email
+from ParsingAndSavingEmails import parse_and_loop_all_emails
+from collections import defaultdict
+counted_emails = 0
+
+def zero(): return 0
+emails = defaultdict(zero)
+for msg in parse_and_loop_all_emails():
+    try:
+        email_source = msg["From"]
+    except Exception as E:
+        continue
+
+    start = max(0, email_source.find("<") + 1)
+    end = email_source.find(">")
+    if end != -1: end += 1
+    else: end = len(email_source)
+
+    email_source = email_source[start: end]
+    if (email_source == ""): print(msg["From"], start, end)
+    emails[email_source] += 1
+    counted_emails += 1
+
 from pprint import pprint
-print = pprint
-for k in os.listdir("Emails"):
-    arr = load_email(k)[1][0]
-    msg = email.message_from_string(str(arr[1], 'utf-8'))
-    for k in msg: print(k)
-    # print((load_email(k)[1][0]))
-    break
+pprint(emails)
