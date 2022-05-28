@@ -1,10 +1,9 @@
 
-# Importing libraries
-from src.EmailProcedures.ParsingAndSavingEmails import count_all_emails
-from src.EmailProcedures.utils import sort_dictionary_on_values
+from VisualizingResults.Visualizer import Visualizer
+from EmailProcedures.utils import group_uni_emails
 
-email_count = count_all_emails()
-sorted = sort_dictionary_on_values(email_count)
+# Visualizer.visualize_university_email_numbers(True)
 
-for name in sorted:
-    print(name, email_count[name])
+from EmailProcedures.ParsingAndSavingEmails import count_all_emails
+w = count_all_emails()
+print(group_uni_emails(w))
