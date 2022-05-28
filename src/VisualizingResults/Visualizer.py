@@ -5,6 +5,11 @@ from src.EmailProcedures.utils import sort_dictionary_on_values
 import matplotlib.pyplot as plt
 from src.EmailProcedures.utils import group_uni_emails
 
+font = {'family' : 'normal',
+        'weight' : 'bold',
+        'size'   : 22}
+
+plt.rc('font', **font)
 class Visualizer():
 
     @staticmethod
@@ -24,7 +29,7 @@ class Visualizer():
         values = []
         for name in sorted:
             # if email_count[name] < 10: break
-            uni_names.append(name)
+            uni_names.append(name.replace(" ", "\n"))
             values.append(email_count[name])
 
         plt.figure(figsize=(10, 5))
@@ -32,7 +37,7 @@ class Visualizer():
         # creating the bar plot
         plt.bar(uni_names, values, color='maroon', width=0.4)
 
-        plt.xlabel("University Name")
+        # plt.xlabel("University Name")
         plt.ylabel("Number of Emails Sent")
         plt.title("Emails Sent By Universities")
         plt.show()
