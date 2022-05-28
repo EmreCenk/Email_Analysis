@@ -34,7 +34,7 @@ def parse_and_loop_all_emails():
             yield None
 
 
-def count_all_emails() -> Dict[str: int]:
+def count_all_emails() -> Dict[str, int]:
     # counted_emails = 0
 
     def zero(): return 0

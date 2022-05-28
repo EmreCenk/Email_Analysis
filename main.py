@@ -1,5 +1,4 @@
 
 # Importing libraries
-
-from pprint import pprint
-pprint(emails)
+from ParsingAndSavingEmails import count_all_emails
+print(count_all_emails())
