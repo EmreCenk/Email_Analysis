@@ -29,7 +29,7 @@ class EmailHandler:
         first_email_id = int(id_list[0])
         latest_email_id = int(id_list[-1])
 
-        for i in range(latest_email_id, first_email_id -1):
+        for i in range(latest_email_id, first_email_id, -1):
             data = self.mail.fetch(str(i), '(RFC822)')
             yield data
             # for response_part in data:
