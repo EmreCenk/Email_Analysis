@@ -34,5 +34,5 @@ class Visualizer():
 
         plt.xlabel("University Name")
         plt.ylabel("Number of Emails Sent")
-        plt.title("Students enrolled in different courses")
+        plt.title("Emails Sent By Universities")
         plt.show()
