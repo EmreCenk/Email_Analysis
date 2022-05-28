@@ -3,11 +3,12 @@
 from src.EmailProcedures.ParsingAndSavingEmails import count_all_emails
 from src.EmailProcedures.utils import sort_dictionary_on_values
 import matplotlib.pyplot as plt
+from src.EmailProcedures.utils import group_uni_emails
 
 class Visualizer():
 
     @staticmethod
-    def visualize_university_email_numbers(group_emails: bool = False):
+    def visualize_university_email_numbers(group_emails: bool = True):
         """
         :param group_emails: If you want to group similar emails
         Ex: "waterlooadmissions@gmail.com" and "universityofwaterloo@gmail.com" would go under
@@ -16,6 +17,8 @@ class Visualizer():
         """
 
         email_count = count_all_emails()
+        if group_emails:
+            email_count = group_uni_emails(email_count)
         sorted = sort_dictionary_on_values(email_count)
         uni_names = []
         values = []
