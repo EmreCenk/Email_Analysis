@@ -1,8 +1,10 @@
 
 # Importing libraries
 import imaplib, email
-from dotenv import load_dotenv
 import os
+import pickle
+
+from dotenv import load_dotenv
 load_dotenv()
 
 #CONSTANTS:
@@ -43,3 +45,15 @@ for i in range(latest_email_id, latest_email_id-3, -1):
 
 
 
+
+
+
+def pickle_email(data):
+    file = open(f"Emails/email_{len(os.listdir('Emails'))}", "ab")
+    pickle.dump(data, file)
+    file.close()
+
+def load_email(file_name):
+    file = open(f"Emails/{file_name}", 'rb')
+    new_data = pickle.load(file)
+    file.close()
