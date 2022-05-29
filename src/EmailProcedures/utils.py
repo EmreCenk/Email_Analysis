@@ -16,6 +16,9 @@ def group_uni_emails(dictionary):
     unis = {"laurier": "Wilfrid Laurier University",
             "wlu": "Wilfrid Laurier University",
 
+            "york": "York University",
+            "lassonde": "York University",
+
             "waterloo": "University of Waterloo",
             "toronto": "University of Toronto",
             "carleton": "Carleton University",
@@ -23,11 +26,13 @@ def group_uni_emails(dictionary):
             "ottawa": "University of Ottawa",
             "mcmaster": "McMaster University",
             "queen": "Queen's University",
-            "york": "York University",
+            "mcgill": "McGill University",
             "alberta": "University of Alberta"}
-
+    grouped = {"n/a": []}
     new_count = {}
-    for k in unis: new_count[unis[k]] = 0
+    for k in unis:
+        grouped[unis[k]] = []
+        new_count[unis[k]] = 0
 
     for name in dictionary:
         asdf = True
@@ -35,8 +40,13 @@ def group_uni_emails(dictionary):
             if uni.lower() in name.lower():
                 print(name, "->", unis[uni])
                 new_count[unis[uni]] += dictionary[name]
+                grouped[unis[uni]].append(name)
                 asdf = False
                 break
 
-        if asdf: print(name)
+        if asdf:
+            grouped["n/a"].append(name)
+            print(name)
+    from pprint import pprint
+    pprint(grouped)
     return new_count

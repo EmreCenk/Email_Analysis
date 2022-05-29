@@ -5,9 +5,11 @@ from src.EmailProcedures.utils import sort_dictionary_on_values
 import matplotlib.pyplot as plt
 from src.EmailProcedures.utils import group_uni_emails
 
-font = {'family' : 'normal',
-        'weight' : 'bold',
-        'size'   : 22}
+font = {
+        # 'family' : 'normal',
+        # 'weight' : 'bold',
+        'size'   : 21
+       }
 
 plt.rc('font', **font)
 class Visualizer():
