@@ -38,7 +38,7 @@ def group_uni_emails(dictionary):
         asdf = True
         for uni in unis:
             if uni.lower() in name.lower():
-                print(name, "->", unis[uni])
+                # print(name, "->", unis[uni])
                 new_count[unis[uni]] += dictionary[name]
                 grouped[unis[uni]].append(name)
                 asdf = False
@@ -46,7 +46,6 @@ def group_uni_emails(dictionary):
 
         if asdf:
             grouped["n/a"].append(name)
-            print(name)
-    from pprint import pprint
-    pprint(grouped)
-    return new_count
+            # print(name)
+
+    return new_count, grouped

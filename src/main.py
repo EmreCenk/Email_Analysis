@@ -1,8 +1,11 @@
 
 from VisualizingResults.Visualizer import Visualizer
-from EmailProcedures.utils import group_uni_emails
 
-Visualizer.visualize_university_email_numbers(True)
+Visualizer.visualize_university_word_count()
+# from EmailProcedures.utils import group_uni_emails
+# from EmailProcedures.ParsingAndSavingEmails import count_words
+# count_words()
+# Visualizer.visualize_university_email_numbers(True)
 
 # from EmailProcedures.ParsingAndSavingEmails import count_all_emails
 # w = count_all_emails()

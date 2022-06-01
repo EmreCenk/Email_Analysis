@@ -3,9 +3,11 @@
 import pickle
 import os
 from src.EmailProcedures.FetchingEmails import EmailHandler
+from src.EmailProcedures import utils
 import email
 from collections import defaultdict
 from typing import Dict
+from bs4 import BeautifulSoup
 
 def pickle_email(data):
     file = open(f"Emails/email_{len(os.listdir('../Emails'))}", "ab")
@@ -55,3 +57,44 @@ def count_all_emails() -> Dict[str, int]:
         emails[email_source] += 1
         # counted_emails += 1
     return emails
+
+def get_uni_messages():
+    emails = count_all_emails()
+    email_count, grouped = utils.group_uni_emails(emails)
+    uni_emails = set()
+    for k in grouped:
+        if k == "n/a": continue
+        for w in grouped[k]: uni_emails.add(w)
+
+    for msg in parse_and_loop_all_emails():
+        try: email_source = msg["From"]
+        except Exception as E: continue
+        if email_source not in uni_emails: continue
+        from time import sleep
+        for part in msg.walk():
+            yield str(part)
+
+def count_words() -> Dict[str, int]:
+    def zero(): return 0
+
+    word_count = defaultdict(zero)
+
+    for message in get_uni_messages():
+        message = message.lower().replace(",", "").replace(".", "").replace("|", "")
+        soup = BeautifulSoup(message, "html.parser")
+        for word in soup.text.split(" "):
+            word_count[word] += 1
+
+    #
+    from pprint import pprint
+    i = 1
+    final = {}
+    for k in utils.sort_dictionary_on_values(word_count):
+        if len(k) == 0: continue
+        final[k[:100]] = word_count[k]
+        if i > 20: break
+        i+=1
+
+
+    return final
+
